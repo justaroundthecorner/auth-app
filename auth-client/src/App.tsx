@@ -11,7 +11,6 @@ const App: React.FC = () => {
   useEffect(() => {
     // Check if user is authenticated based on localStorage
     const storedAuth = localStorage.getItem('isAuthenticated');
-    console.log("🚀 ~ useEffect ~ storedAuth:", storedAuth)
     if (storedAuth === 'true') {
       setIsAuthenticated(true);
     }
@@ -20,9 +19,9 @@ const App: React.FC = () => {
   return (
     <Router>
       <Routes>
-      <Route path="/" element={<LandingPage />} />  {/* Default route for LandingPage */}
+        <Route path="/" element={<LandingPage />} />  {/* Default route for LandingPage */}
         <Route path="/signup" element={<Signup />} />
-        <Route path="/signin" element={<Signin />} />
+        <Route path="/signin" element={<Signin setIsAuthenticated={setIsAuthenticated} />} />
         {/* Protect dashboard route by checking isAuthenticated */}
         <Route
           path="/dashboard"

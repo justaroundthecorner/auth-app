@@ -56,17 +56,44 @@ export class UserService {
    *
    * @param email - The user's email address.
    * @param password - The user's password.
-   * @returns The user document if the credentials are valid, or null otherwise.
+   * @returns The user document if the credentials are valid, or throws an error otherwise.
+   * @throws HttpException if user is not found or password does not match.
    */
   async validateUser(email: string, password: string): Promise<User | null> {
-    // Find the user by email in the database
-    const user = await this.userModel.findOne({ email });
+    try {
+      // Find the user by email in the database
+      const user = await this.userModel.findOne({ email });
 
-    // Compare the provided password with the stored hashed password
-    if (user && (await bcrypt.compare(password, user.password))) {
+      // Check if user is found
+      if (!user) {
+        // Throw an error if the user is not found
+        throw new HttpException(
+          'User not found with this email.',
+          HttpStatus.NOT_FOUND,
+        );
+      }
+
+      // Compare the provided password with the stored hashed password
+      const isPasswordValid = await bcrypt.compare(password, user.password);
+
+      if (!isPasswordValid) {
+        // Throw an error if the password does not match
+        throw new HttpException(
+          'Invalid credentials. Password does not match.',
+          HttpStatus.UNAUTHORIZED,
+        );
+      }
+
       return user; // Return the user if credentials are valid
-    }
+    } catch (error) {
+      // Log the error if something goes wrong
+      console.error('Error during user validation:', error);
 
-    return null; // Return null if credentials are invalid
+      // Re-throw the error with proper HTTP status
+      throw new HttpException(
+        error.message || 'Error during validation',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
 }
