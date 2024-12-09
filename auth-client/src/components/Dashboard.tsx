@@ -6,9 +6,7 @@ const Dashboard: React.FC = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // Remove authentication status from localStorage
     localStorage.removeItem('isAuthenticated');
-    // Redirect to the sign-in page
     navigate('/signin');
   };
 

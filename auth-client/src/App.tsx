@@ -19,10 +19,9 @@ const App: React.FC = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<LandingPage />} />  {/* Default route for LandingPage */}
+        <Route path="/" element={<LandingPage />} />  
         <Route path="/signup" element={<Signup />} />
         <Route path="/signin" element={<Signin setIsAuthenticated={setIsAuthenticated} />} />
-        {/* Protect dashboard route by checking isAuthenticated */}
         <Route
           path="/dashboard"
           element={isAuthenticated ? <Dashboard /> : <Navigate to="/signin" />}

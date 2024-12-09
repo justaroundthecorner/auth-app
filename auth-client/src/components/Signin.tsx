@@ -79,7 +79,7 @@ const Signin: React.FC<SigninProps> = ({ setIsAuthenticated }) => {
                 type="email"
                 fullWidth
                 value={email}
-                onChange={(e) => setEmail(e.target.value)} // Update email state on change
+                onChange={(e) => setEmail(e.target.value)} 
                 required // Mark the field as required
               />
             </Grid>
@@ -91,7 +91,7 @@ const Signin: React.FC<SigninProps> = ({ setIsAuthenticated }) => {
                 type="password"
                 fullWidth
                 value={password}
-                onChange={(e) => setPassword(e.target.value)} // Update password state on change
+                onChange={(e) => setPassword(e.target.value)} 
                 required // Mark the field as required
               />
             </Grid>
@@ -102,8 +102,8 @@ const Signin: React.FC<SigninProps> = ({ setIsAuthenticated }) => {
                 type="submit"
                 variant="contained"
                 fullWidth
-                color="primary" // Set button color
-                sx={{ padding: '10px' }} // Add padding for a larger button
+                color="primary" 
+                sx={{ padding: '10px' }} 
               >
                 Signin
               </Button>

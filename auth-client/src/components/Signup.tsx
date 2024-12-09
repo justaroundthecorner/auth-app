@@ -82,7 +82,7 @@ const Signup: React.FC = () => {
           padding: 2,
           backgroundColor: '#fff',
           borderRadius: 2,
-          boxShadow: 3, // Add shadow for a card-like appearance
+          boxShadow: 3, 
         }}
       >
         {/* Title */}
@@ -112,8 +112,8 @@ const Signup: React.FC = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            error={emailError} // Highlight error if email is invalid
-            helperText={emailError ? 'Invalid email address' : ''} // Display email error
+            error={emailError} 
+            helperText={emailError ? 'Invalid email address' : ''} 
           />
 
           {/* Password field */}
@@ -125,7 +125,7 @@ const Signup: React.FC = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            error={passwordError} // Highlight error if password is invalid
+            error={passwordError}
           />
 
           {/* Error message */}

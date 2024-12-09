@@ -1,9 +1,9 @@
-import axios from 'axios';
+import axios from "axios";
 
-const API_URL = 'http://localhost:5000/user'; // Adjust URL as needed
+const API_URL = "http://localhost:5000/user";
 
 export const signup = async (name: string, email: string, password: string) => {
-    console.log("🚀 ~ API_URL:", API_URL)
+  console.log("🚀 ~ API_URL:", API_URL);
 
   return axios.post(`${API_URL}/signup`, { name, email, password });
 };
