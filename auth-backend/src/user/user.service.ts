@@ -24,7 +24,6 @@ export class UserService {
   async signup(email: string, name: string, password: string): Promise<User> {
     // Check if a user with the given email already exists
     const existingUser = await this.userModel.findOne({ email });
-    console.log('🚀 ~ UserService ~ signup ~ existingUser:', existingUser); // Debugging log
     if (existingUser) {
       // Throw an error if the email is already taken
       throw new HttpException(
