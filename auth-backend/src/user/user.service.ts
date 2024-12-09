@@ -1,9 +1,8 @@
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common'; // Importing necessary decorators and utilities from NestJS
-import { InjectModel } from '@nestjs/mongoose'; // For injecting the User model into the service
-import { Model } from 'mongoose'; // Mongoose model interface
-import * as bcrypt from 'bcrypt'; // For hashing passwords
-import { User } from './user.schema'; // Importing the User schema
-
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import * as bcrypt from 'bcrypt';
+import { User } from './user.schema';
 /**
  * UserService: Handles business logic related to user authentication and management.
  */

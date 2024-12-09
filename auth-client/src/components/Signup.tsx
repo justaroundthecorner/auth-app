@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { signup } from '../api/authApi'; // Import the signup API function
-import { TextField, Button, Typography, Container, Box, FormHelperText } from '@mui/material'; // Material-UI components
-import { useNavigate } from 'react-router-dom'; // Hook for programmatic navigation
+import { signup } from '../api/authApi'; 
+import { TextField, Button, Typography, Container, Box, FormHelperText } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 // Signup component
 const Signup: React.FC = () => {
@@ -13,7 +13,7 @@ const Signup: React.FC = () => {
   const [emailError, setEmailError] = useState<boolean>(false); // Email validation error
   const [passwordError, setPasswordError] = useState<boolean>(false); // Password validation error
 
-  const navigate = useNavigate(); // Hook to navigate programmatically
+  const navigate = useNavigate(); 
 
   // Email validation function using a regex
   const isValidEmail = (email: string) => {
@@ -38,7 +38,7 @@ const Signup: React.FC = () => {
     if (!isValidEmail(email)) {
       setEmailError(true);
       setError('Please enter a valid email address.');
-      return; // Stop submission if invalid
+      return; 
     }
 
     // Validate password

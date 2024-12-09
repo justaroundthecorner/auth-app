@@ -5,9 +5,8 @@ import {
   Logger,
   HttpException,
   HttpStatus,
-} from '@nestjs/common'; // Importing necessary decorators and utilities from NestJS
-import { UserService } from './user.service'; // Importing the UserService to handle user-related business logic
-
+} from '@nestjs/common';
+import { UserService } from './user.service';
 /**
  * UserController: Handles HTTP requests related to user authentication and registration.
  */

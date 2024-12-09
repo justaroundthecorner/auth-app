@@ -4,7 +4,6 @@ import { UserService } from './user.service';
 import { User } from './user.schema'; // Importing the User schema
 import { Document } from 'mongoose'; // Importing Mongoose Document type
 
-// Mock Mongoose User document (for better type compatibility)
 interface MockUser extends Document {
   email: string;
   name: string;
@@ -27,7 +26,7 @@ describe('UserController', () => {
       controllers: [UserController], // UserController being tested
       providers: [
         {
-          provide: UserService, // Replacing UserService with the mock
+          provide: UserService,
           useValue: serviceMock,
         },
       ],
@@ -57,7 +56,6 @@ describe('UserController', () => {
         name: 'Test User',
         password: 'hashedPassword123',
         _id: '1',
-        // Mongoose-specific methods (mocking the required ones)
       } as MockUser;
 
       // Mocking the service method

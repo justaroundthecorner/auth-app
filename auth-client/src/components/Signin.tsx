@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { signin } from '../api/authApi'; // Import the signin API function
-import { TextField, Button, Typography, Container, Grid, Box, Alert } from '@mui/material'; // Material-UI components
-import { useNavigate } from 'react-router-dom'; // Hook for navigation
+import { signin } from '../api/authApi'; 
+import { TextField, Button, Typography, Container, Grid, Box, Alert } from '@mui/material';
+import { useNavigate } from 'react-router-dom'; 
 
 // Signin component
 interface SigninProps {
@@ -30,7 +30,6 @@ const Signin: React.FC<SigninProps> = ({ setIsAuthenticated }) => {
       // Store authentication status in localStorage
       localStorage.setItem('isAuthenticated', 'true');
       
-      // Update state in the parent component immediately
       setIsAuthenticated(true);
 
       // Redirect the user to the dashboard
