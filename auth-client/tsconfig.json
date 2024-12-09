@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+      "target": "es5",
+      "lib": ["dom", "esnext"],
+      "jsx": "react",
+      "moduleResolution": "node",
+      "strict": true,
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true,
+      "typeRoots": ["node_modules/@types"],
+      
+    },
+    "include": [
+      "src/**/*.ts",
+      "src/**/*.tsx"
+    ]
+  }
+  
