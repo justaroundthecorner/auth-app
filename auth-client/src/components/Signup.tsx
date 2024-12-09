@@ -1,59 +1,72 @@
 import React, { useState } from 'react';
-import { signup } from '../api/authApi';
-import { TextField, Button, Typography, Container, Box, FormHelperText } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { signup } from '../api/authApi'; // Import the signup API function
+import { TextField, Button, Typography, Container, Box, FormHelperText } from '@mui/material'; // Material-UI components
+import { useNavigate } from 'react-router-dom'; // Hook for programmatic navigation
 
+// Signup component
 const Signup: React.FC = () => {
+  // State variables to hold form inputs and errors
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState<string | null>(null);
-  const [emailError, setEmailError] = useState<boolean>(false);
-  const [passwordError, setPasswordError] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null); // General error message
+  const [emailError, setEmailError] = useState<boolean>(false); // Email validation error
+  const [passwordError, setPasswordError] = useState<boolean>(false); // Password validation error
+
   const navigate = useNavigate(); // Hook to navigate programmatically
 
-  // Email validation function
+  // Email validation function using a regex
   const isValidEmail = (email: string) => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return emailRegex.test(email);
   };
 
-  // Password validation function
+  // Password validation function using a regex
   const isValidPassword = (password: string) => {
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     return passwordRegex.test(password);
   };
 
+  // Form submission handler
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError(null);
-    setEmailError(false);
-    setPasswordError(false);
+    e.preventDefault(); // Prevent default form submission
+    setError(null); // Clear previous errors
+    setEmailError(false); // Reset email error
+    setPasswordError(false); // Reset password error
 
-    // Validate email and password
+    // Validate email
     if (!isValidEmail(email)) {
       setEmailError(true);
       setError('Please enter a valid email address.');
-      return;
+      return; // Stop submission if invalid
     }
 
+    // Validate password
     if (!isValidPassword(password)) {
       setPasswordError(true);
-      setError('Password must be at least 8 characters long, contain at least one letter, one number, and one special character.');
-      return;
+      setError(
+        'Password must be at least 8 characters long, contain at least one letter, one number, and one special character.'
+      );
+      return; // Stop submission if invalid
     }
 
     try {
+      // Call the signup API
       const response = await signup(name, email, password);
-      alert('Signup successful');
+      alert('Signup successful'); // Notify user of success
+
+      // Set authentication status in localStorage
       localStorage.setItem('isAuthenticated', 'true');
+
+      // Navigate to the dashboard
       navigate('/dashboard');
     } catch (error: any) {
+      // Handle API errors
       if (error.response?.status === 400) {
-        // If the error status is 400, it indicates a duplicate email
+        // If status 400, it's likely a duplicate email
         setError('This email is already registered. Please use a different email.');
       } else {
-        setError('Signup failed: ' + error.message);
+        setError('Signup failed: ' + error.message); // Display generic error
       }
     }
   };
@@ -69,13 +82,17 @@ const Signup: React.FC = () => {
           padding: 2,
           backgroundColor: '#fff',
           borderRadius: 2,
-          boxShadow: 3,
+          boxShadow: 3, // Add shadow for a card-like appearance
         }}
       >
+        {/* Title */}
         <Typography variant="h5" component="h1" gutterBottom>
           Sign Up
         </Typography>
+
+        {/* Signup form */}
         <form onSubmit={handleSubmit}>
+          {/* Name field */}
           <TextField
             label="Name"
             type="text"
@@ -85,6 +102,8 @@ const Signup: React.FC = () => {
             onChange={(e) => setName(e.target.value)}
             required
           />
+
+          {/* Email field */}
           <TextField
             label="Email"
             type="email"
@@ -93,9 +112,11 @@ const Signup: React.FC = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            error={emailError}  // Show error if email is invalid
-            helperText={emailError ? 'Invalid email address' : ''}
+            error={emailError} // Highlight error if email is invalid
+            helperText={emailError ? 'Invalid email address' : ''} // Display email error
           />
+
+          {/* Password field */}
           <TextField
             label="Password"
             type="password"
@@ -104,9 +125,13 @@ const Signup: React.FC = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            error={passwordError}  // Show error if password is invalid
+            error={passwordError} // Highlight error if password is invalid
           />
-          {<FormHelperText error>{error}</FormHelperText>}  {/* Display general error */}
+
+          {/* Error message */}
+          {<FormHelperText error>{error}</FormHelperText>}
+
+          {/* Submit button */}
           <Button
             type="submit"
             variant="contained"
